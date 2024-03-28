@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.meme_app"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.meme_app"
@@ -66,4 +66,17 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+//Coil
+    implementation ("io.coil-kt:coil-compose:2.2.2")
+    implementation ("com.google.accompanist:accompanist-coil:0.10.0")
+
+//navigation
+    implementation("androidx.navigation:navigation-compose:2.7.3")
+
+
 }
