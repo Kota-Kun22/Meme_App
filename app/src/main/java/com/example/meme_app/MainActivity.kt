@@ -14,10 +14,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.navigation.NavType
 
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.meme_app.Models.Meme
 import com.example.meme_app.Screens.DetailsScreen
 import com.example.meme_app.Screens.MainScreen
@@ -73,9 +75,21 @@ class MainActivity : ComponentActivity() {
                         MainScreen(memeList= memeList, navController= navController)
                     }
 
-                    composable(route="DetailsScreen")
+                    composable(route="DetailsScreen?name={name}&url={url}",
+                        arguments = listOf(
+                            navArgument(name="name"){
+                            type= NavType.StringType
+                        },
+                            navArgument(name= "url"){
+                                type= NavType.StringType
+                            }
+                        )
+                    )
                     {
-                        DetailsScreen()
+                        DetailsScreen(
+                            name=it.arguments?.getString("name"),
+                            url =it.arguments?.getString("url")
+                        )
                     }
                 }
             }
