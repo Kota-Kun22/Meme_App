@@ -15,3 +15,11 @@ object Retrofit_Instance {
 
     }
 }
+/**
+ * here making the Retrofit instance
+ * inherit the api form the API_Interface
+ * builder()
+ * converterfactory( GsonConverterFactory.create())
+ * then build
+ * and then again create
+ * */

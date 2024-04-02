@@ -42,7 +42,9 @@ fun DetailsScreen(modifier: Modifier = Modifier, url: String?, name: String?)
             )
 
         }
+
         Spacer(modifier.height(20.dp))
+
         if (name != null){
             Text(text = name,
                 modifier

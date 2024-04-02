@@ -43,10 +43,11 @@ class MainActivity : ComponentActivity() {
                 }
                 val scope = rememberCoroutineScope()
 
-                LaunchedEffect(key1 = true){ scope.launch(Dispatchers.IO)
-                {
+                LaunchedEffect(key1 = true){ scope.launch(Dispatchers.IO)//making a IO thread here
+                {//error Handling
                         val response = try {
                             Retrofit_Instance.api.getALLMemesList()
+
                         }catch (e: IOException){
 
                             Toast.makeText(this@MainActivity, "app error: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -59,7 +60,7 @@ class MainActivity : ComponentActivity() {
                             return@launch
                         }
                         if (response.isSuccessful && response.body() != null){
-                            withContext(Dispatchers.Main){
+                            withContext(Dispatchers.Main){// now if there is no error Merging it into MAIN Thread
                                 memeList = response.body()!!.data.memes
                             }
                         }
@@ -70,19 +71,23 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(navController = navController, startDestination = "MainScreen" )
                 {
+                    //ROOT 1
                     composable(route= "MainScreen")
                     {
                         MainScreen(memeList= memeList, navController= navController)
                     }
-
+                    //ROOT 2
                     composable(route="DetailsScreen?name={name}&url={url}",
                         arguments = listOf(
+
                             navArgument(name="name"){
                             type= NavType.StringType
                         },
+
                             navArgument(name= "url"){
                                 type= NavType.StringType
                             }
+
                         )
                     )
                     {

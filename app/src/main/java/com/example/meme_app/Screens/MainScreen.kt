@@ -43,19 +43,24 @@ import com.example.meme_app.Models.Meme
 fun MainScreen(modifier: Modifier = Modifier, memeList: List<Meme>, navController: NavHostController)
 {
     Column(modifier.fillMaxSize()) {
+
         val textState = remember{
             mutableStateOf(TextFieldValue(""))
-        }
+        }// state for the text
 
-        SearchView(state=textState, placeholder= "Search here..", modifier=modifier)
+        SearchView(state=textState, placeholder= "Search here..", modifier=modifier)// Search View
 
-        val searchedText =  textState.value.text
+        val searchedText =  textState.value.text//getting the text for the searching its value
+
+        // now making the LazyVerticalStaggeredGrid
         LazyVerticalStaggeredGrid(columns = StaggeredGridCells.Fixed(2),
             contentPadding = PaddingValues(10.dp)
         ){
-            items(items = memeList.filter
-            { it.name.contains(searchedText,ignoreCase = true)
-            },key={it.id}) {
+            items(items = memeList.filter//applying filter on the memeList
+            {
+                it.name.contains(searchedText,ignoreCase = true)//checking this list if it contains that searched
+            },
+                key={it.id}) {
                 item ->
                 MemeItem(
                     itemName= item.name,
@@ -73,7 +78,12 @@ fun MainScreen(modifier: Modifier = Modifier, memeList: List<Meme>, navControlle
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MemeItem(itemName: String, itemUrl: String, navController: NavHostController,modifier: Modifier=Modifier) {
+fun MemeItem(
+    itemName: String,
+    itemUrl: String,
+    navController: NavHostController,
+    modifier: Modifier=Modifier)
+{
 
     Card(
         modifier
@@ -98,6 +108,8 @@ fun MemeItem(itemName: String, itemUrl: String, navController: NavHostController
                     .clip(
                         RoundedCornerShape(20.dp)
                     ))
+
+
             Spacer(modifier = Modifier.height(20.dp))
 
 
